@@ -10,7 +10,7 @@ ENV ARCH=riscv64
 
 FROM builder_${TARGETARCH} AS build
 RUN apt-get update
-RUN apt-get install -y curl gpg ca-certificates tar dirmngr build-essential git autoconf libtool pkg-config libdb++-dev libboost-all-dev bsdmainutils openssl libssl-dev
+RUN apt-get install -y curl gpg ca-certificates tar dirmngr build-essential git autoconf libtool pkg-config libdb++-dev libboost-all-dev bsdmainutils openssl libssl-dev automake make
 WORKDIR /opt
 COPY dogecoin ./dogecoin
 COPY bin ./bin
@@ -36,6 +36,6 @@ COPY --from=build /opt/ /opt/
 RUN apt update \
     && apt install -y --no-install-recommends gosu libatomic1 \
     && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && ln -sv /opt/dogecoin/bin/* /usr/local/bin \
+    && ln -sv /opt/dogecoin/src/dogecoind /usr/local/bin/dogecoind \
     && ln -sv /opt/bin/* /usr/local/bin
 CMD ["doge_oneshot"]
