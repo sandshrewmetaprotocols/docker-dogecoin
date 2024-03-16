@@ -1,0 +1,31 @@
+[Unit]
+Description=Dogecoin Docker Container
+Documentation=https://github.com/sandshrewmetaprotocols/docker-dogecoin
+Requires=docker.service
+After=docker.service
+
+[Service]
+RestartSec=10
+Restart=always
+
+# Modify IP6_PREFIX to match network config
+Environment="NAME=dogecoin"
+Environment="DATA_VOL=dogecoin-data"
+Environment="IMG=sandshrewmetaprotocols/dogecoin:dev"
+Environment="PORT=22556:22556/tcp"
+
+# To override environment variables, use local configuration directory:
+# /etc/systemd/system/docker-dogecoin.service/local.conf
+# http://www.freedesktop.org/software/systemd/man/systemd.unit.html
+
+# Clean-up bad state if still hanging around
+ExecStartPre=-/usr/bin/docker rm -f $NAME
+
+# Attempt to pull new image for security updates
+ExecStartPre=-/usr/bin/docker pull $IMG
+
+# Main process
+ExecStart=/usr/bin/docker run --rm -v ${DATA_VOL}:/dogecoin --name ${NAME} -p ${PORT} ${IMG} doge_oneshot $ARGS
+
+[Install]
+WantedBy=multi-user.target

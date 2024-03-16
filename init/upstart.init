@@ -1,0 +1,15 @@
+# Copy to /etc/init/docker-dogecoin.conf
+description "Docker container for dogecoin p2p node"
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+pre-start script
+  # Clean-up if left behind
+  docker rm -f dogecoin-node || true
+  
+  # Attempt to always update and fail silently if the network isn't ready
+  docker pull sandshrewmetaprotocols/dogecoin || true
+end script
+script
+  exec docker run --rm -v dogecoin-data:/dogecoin --name=dogecoin-node --rm -p 22556:22556 sandshrewmetaprotocols/dogecoin
+end script
