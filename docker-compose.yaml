@@ -6,7 +6,7 @@ services:
     command: ["-txindex", "-rpcbind=0.0.0.0"]
     build:
       dockerfile: Dockerfile
-      context: ./docker-dogecoin
+      context: ./
     ports:
       - 0.0.0.0:22556:22556
       - 127.0.0.1:22555:22555
