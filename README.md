@@ -1,6 +1,6 @@
 # docker-dogecoin
 
-Very image
+very image
 
 ## Usage
 
