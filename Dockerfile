@@ -34,7 +34,7 @@ VOLUME ["/dogecoin/.dogecoin"]
 WORKDIR /dogecoin
 COPY --from=build /opt/ /opt/
 RUN apt update \
-    && apt install -y --no-install-recommends gosu libatomic1 \
+    && apt install -y --no-install-recommends gosu libatomic1 libboost-all-dev libssl-dev libdb++-dev \
     && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && ln -sv /opt/dogecoin/src/dogecoind /usr/local/bin/dogecoind \
     && ln -sv /opt/bin/* /usr/local/bin
