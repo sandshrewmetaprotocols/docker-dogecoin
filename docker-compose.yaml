@@ -2,10 +2,11 @@ version: '3.3'
 services:
   dogecoind:
     image: sandshrewmetaprotocols/dogecoind
-    args: ["-txindex", "-rpcbind=0.0.0.0"]
+    entrypoint: ["doge_oneshot"]
+    command: ["-txindex", "-rpcbind=0.0.0.0"]
     build:
       dockerfile: Dockerfile
-      context: ./
+      context: ./docker-dogecoin
     ports:
       - 0.0.0.0:22556:22556
       - 127.0.0.1:22555:22555
