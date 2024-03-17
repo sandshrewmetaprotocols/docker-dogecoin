@@ -2,6 +2,7 @@ version: '3.3'
 services:
   dogecoind:
     image: sandshrewmetaprotocols/dogecoind
+    args: ["-txindex", "-rpcbind=0.0.0.0"]
     build:
       dockerfile: Dockerfile
       context: ./
