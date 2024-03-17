@@ -30,7 +30,6 @@ RUN groupadd -g ${GROUP_ID} dogecoin \
     && useradd -u ${USER_ID} -g dogecoin -d /dogecoin dogecoin
 ENV HOME /dogecoin
 EXPOSE 22556
-VOLUME ["/dogecoin/.dogecoin"]
 WORKDIR /dogecoin
 COPY --from=build /opt/ /opt/
 RUN apt update \
