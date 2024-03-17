@@ -38,4 +38,4 @@ RUN apt update \
     && apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && ln -sv /opt/dogecoin/src/dogecoind /usr/local/bin/dogecoind \
     && ln -sv /opt/bin/* /usr/local/bin
-CMD ["doge_oneshot"]
+ENTRYPOINT ["doge_oneshot"]
