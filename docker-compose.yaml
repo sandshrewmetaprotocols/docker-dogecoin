@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  dogecoind:
+    image: sandshrewmetaprotocols/dogecoind
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    ports:
+      - 0.0.0.0:22556:22556
+      - 127.0.0.1:22555:22555
